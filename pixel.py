@@ -12,14 +12,16 @@ class PixelSq:
 		sumGray = 0
 		for i in range(self.size):
 			for j in range(self.size):
+				if (pix[i, j] > 255 or pix[i, j] < 0):
+					raise Exception('spam')
 				sumGray += pix[i, j]
 		return int(sumGray / (self.size * self.size))
 
 	def __init__(self, square, size, x = None, y = None):
 		self.square = square
+		self.size = size
 		self.x = x
 		self.y = y
-		self.size = size
 		self.avgGray = self.avgGray()
 
 	

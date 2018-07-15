@@ -1,0 +1,23 @@
+what I need to do matching:
+- Each FROM should have a list of priorities for TO
+- Each TO should have a list of priorities for FROM
+- Store these in a map(FROM item, List[To item])
+- Some datastructure where:
+	* if you look up TO, you get married FROM
+	* if you look up FROM, you get married TO
+
+when I match:
+- Keep going in FROM list until find bachelor, while theyre not all taken
+- Check if engaged prefered TO is engaged, 
+		* if TO prefers this new engaged, switch and divorce the old FROM
+			mark in hash lists?
+		* if not prefers, continue down priority list
+
+Should return:
+- hashlist of FROM to their preferred TO, can look up coordinates in TO
+
+Setting the picture:
+- given this hashlist, create a new picture
+- Go through the keys, mark their "value" TO coordinates with the FROM value
+
+return
