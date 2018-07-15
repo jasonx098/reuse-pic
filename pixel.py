@@ -1,4 +1,4 @@
-from PIL import Image, ImageStat
+from PIL import Image
 
 """
 Class to contain the pixel square as well as information 

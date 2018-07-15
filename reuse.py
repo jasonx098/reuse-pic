@@ -1,4 +1,4 @@
-from PIL import Image, ImageStat
+from PIL import Image
 from pixel import PixelSq
 import time
 
@@ -112,6 +112,13 @@ def mapFromtoTo(pathFrom, pathTo):
 	fromMatch = matching(fromPriorities, toPriorities)
 	end = time.time()
 	print("Matching: " + str(end - start))
+
+	# checks for matching
+	if (len(fromMatch.keys()) > len(set(fromMatch.keys()))):
+		print("NOPE")
+	if (len(fromMatch.values()) > len(set(fromMatch.values()))):
+		print("NOPE")
+
 
 def main():
 	pathFrom = "glover.jpg"
