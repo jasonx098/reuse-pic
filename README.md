@@ -6,3 +6,15 @@ Dependencies: Python3, Pillow
 
 Add selected images into img directory. Change parameters in reuse.py. Run with `python reuse.py`
 
+### Samples
+From Picture: Donald Glover
+
+<img src="img/glovergray.png" height="400" width="400">
+
+To Picture: Frank Ocean
+
+<img src="img/frankgray.png" height="400" width="400">
+
+Result:
+
+<img src="img/newfrank.png" height="400" width="400">
