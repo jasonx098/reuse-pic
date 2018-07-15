@@ -21,3 +21,9 @@ Setting the picture:
 - Go through the keys, mark their "value" TO coordinates with the FROM value
 
 return
+
+
+Problems: 
+- Slow matching algorithm
+- Maybe try finding better library for photos
+- Need some better testing
