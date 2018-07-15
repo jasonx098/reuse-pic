@@ -14,7 +14,6 @@ def squares(img):
 	for i in range(numSqX):
 		for j in range(numSqY):
 			squareList.append(getSquare(img, i, j))
-
 	squareList.sort(key = lambda x: x.avgGray)
 
 	return squareList
@@ -105,7 +104,7 @@ def mapFromtoTo(pathFrom, pathTo):
 	end = time.time()
 	print("Matching: " + str(end - start))
 
-	# checks for matching
+	# checks for matching bijection
 	if (len(fromMatch.keys()) > len(set(fromMatch.keys()))):
 		print("NOPE")
 	if (len(fromMatch.values()) > len(set(fromMatch.values()))):
