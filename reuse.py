@@ -3,7 +3,7 @@ from pixel import PixelSq
 import time
 
 """ Globals """
-size = 500 # size of square width and height
+size = 40 # size of square width and height
 cropSize = (1000, 1000) # size of cropped image (x, y)
 numSqX = int(cropSize[0]/size) # number of x coordinate squares
 numSqY = int(cropSize[1]/size) # number of y coordinate squares
@@ -31,17 +31,55 @@ def squareTo(img, i, j):
 	return PixelSq(
 		img.crop((i*size, j*size, (i+1)*size, (j+1)*size)), size, i, j)
 
+
 # given a pixel and the correspondg list of pixels, return a list of sorted priorities of pixels
 def priorities(pix, corPixList):
 	priList = corPixList
 	priList.sort(key = lambda x: abs(x.avgGray - pix.avgGray))
 	return priList
 
+
 # given a map(pixel, list[pixel]) from priority and a map to priority, match them together, 
 # return a hash list of FROM to which TO.
-#def matching(fromPriorities, toPriorities):
+def matching(fromPriorities, toPriorities):
+	fromPixList = list(fromPriorities.keys())
+	toPixList = list(toPriorities.keys())
 
+	mapAskList = {fromPix: [False] * len(toPriorities) for fromPix in fromPriorities.keys()}
+	fromMatch = {fromPix:None for fromPix in fromPriorities.keys()}
+	toMatch = {toPix:None for toPix in toPriorities.keys()}
 
+	while (None in fromMatch.values()):
+		# could do this faster if for all from pixels kept unique "askList"
+
+		# first asking pix that is not matched
+		askingPix = next(fromPix for fromPix in fromPixList if fromMatch[fromPix] is None)
+
+		# first unasked toPix in priority list
+		askList = mapAskList[askingPix]
+		askInd = askList.index(False)
+
+		askList[askInd] = True
+
+		# if toPix is single
+		if (toMatch[toPixList[askInd]] is None):
+			toMatch[toPixList[askInd]] = askingPix
+			fromMatch[askingPix] = toPixList[askInd]
+
+		else:
+			toPix = toPixList[askInd]
+			# if toPix prefers askingPix
+			toPixPri = toPriorities[toPix]
+
+			# CHECK IF THIS IS THE RIGHT ORDER
+			if (toPixPri.index(askingPix) < toPixPri.index(toMatch[toPix])):
+				# rejected pixel
+				reject = toMatch[toPix]
+				fromMatch[reject] = None
+				toMatch[toPix] = askingPix
+				fromMatch[askingPix] = toPix
+
+	return fromMatch
 
 
 # Finds which From PixelSqs map to the corresponding To PixelSqs. Returns Map(From, To)
@@ -69,22 +107,11 @@ def mapFromtoTo(pathFrom, pathTo):
 	end = time.time()
 	print("priorities: " + str(end - start))
 
-	print(fromPriorities)
 	# matching algorithm
-
-
-
-
-
-	#print([sq.avgGray for sq in sqFrom])
-
-
-
-
-
-
-
-
+	start = time.time()
+	fromMatch = matching(fromPriorities, toPriorities)
+	end = time.time()
+	print("Matching: " + str(end - start))
 
 def main():
 	pathFrom = "glover.jpg"
