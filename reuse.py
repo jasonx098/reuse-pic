@@ -1,5 +1,6 @@
 from PIL import Image
 from pixel import PixelSq
+import canvas 
 import time
 
 """ Globals """
@@ -118,7 +119,8 @@ def main():
 	pathFrom = "glover.jpg"
 	pathTo = "frank.jpg"
 
-	mapFromtoTo(pathFrom, pathTo)
+	fromMatch = mapFromtoTo(pathFrom, pathTo)
+	canvas.makeCanvas(fromMatch)
 
 if __name__ == "__main__":
 	main()
