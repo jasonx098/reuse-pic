@@ -8,8 +8,8 @@ size = 25 								# size of square width and height
 cropSize = (1000, 1000) 				# size of cropped image (x, y)
 numSqX = int(cropSize[0]/size) 			# number of x coordinate squares
 numSqY = int(cropSize[1]/size) 			# number of y coordinate squares
-pathFrom = "img/frank.jpg"				# From picture
-pathTo = "img/glover.jpg" 				# To picture
+pathFrom = "img/glover.jpg"				# From picture
+pathTo = "img/frank.jpg" 				# To picture
 
 def main():
 	sqLists = getPixelList(pathFrom, pathTo)
