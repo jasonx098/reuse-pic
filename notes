@@ -27,3 +27,5 @@ Problems:
 - Slow matching algorithm
 - Maybe try finding better library for photos
 - Need some better testing
+- Maybe averaging gray scale isn't that great
+- Move to RGB?

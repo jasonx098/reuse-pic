@@ -111,6 +111,8 @@ def mapFromtoTo(pathFrom, pathTo):
 	if (len(fromMatch.values()) > len(set(fromMatch.values()))):
 		print("NOPE")
 
+	return fromMatch
+
 
 def main():
 	pathFrom = "glover.jpg"
