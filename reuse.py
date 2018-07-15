@@ -4,7 +4,7 @@ import canvas
 import time
 
 """ Globals """
-size = 40 # size of square width and height
+size = 25 # size of square width and height
 cropSize = (1000, 1000) # size of cropped image (x, y)
 numSqX = int(cropSize[0]/size) # number of x coordinate squares
 numSqY = int(cropSize[1]/size) # number of y coordinate squares
@@ -27,7 +27,7 @@ def getSquare(img, i, j):
 # given a pixel and the correspondg list of pixels, return a list of sorted priorities of pixels
 def priorities(pix, corPixList):
 	priList = corPixList
-	priList.sort(key = lambda x: abs(x.avgGray - pix.avgGray))
+	priList.sort(key = lambda x: abs(x.avgGray - pix.avgGray), reverse = True)
 	return priList
 
 
@@ -79,6 +79,10 @@ def mapFromtoTo(pathFrom, pathTo):
 
 	imgFrom = Image.open(pathFrom).convert("L").resize(cropSize)
 	imgTo = Image.open(pathTo).convert("L").resize(cropSize)
+
+	imgFrom.show()
+	imgTo.show()
+	return
 
 	# sorted list of PixelSq for From pic
 	start = time.time()
