@@ -9,27 +9,19 @@ numSqX = int(cropSize[0]/size) # number of x coordinate squares
 numSqY = int(cropSize[1]/size) # number of y coordinate squares
 
 # given an image, return back a list of squares
-def squares(img, to):
+def squares(img):
 	squareList = []
 	for i in range(numSqX):
 		for j in range(numSqY):
-			if (to):
-				squareList.append(squareTo(img, i, j))
-			else:
-				squareList.append(squareFrom(img, i, j))
+			squareList.append(getSquare(img, i, j))
 
 	squareList.sort(key = lambda x: x.avgGray)
 
 	return squareList
 
 # PixelSq if it is a From square
-def squareFrom(img, i, j):
-	return PixelSq(img.crop((i*size, j*size, (i+1)*size, (j+1)*size)), size)
-
-# PixelSq if it is a To square
-def squareTo(img, i, j):
-	return PixelSq(
-		img.crop((i*size, j*size, (i+1)*size, (j+1)*size)), size, i, j)
+def getSquare(img, i, j):
+	return PixelSq(img.crop((i*size, j*size, (i+1)*size, (j+1)*size)), size, i, j)
 
 
 # given a pixel and the correspondg list of pixels, return a list of sorted priorities of pixels
@@ -90,13 +82,13 @@ def mapFromtoTo(pathFrom, pathTo):
 
 	# sorted list of PixelSq for From pic
 	start = time.time()
-	sqFrom = squares(imgFrom, to = False)
+	sqFrom = squares(imgFrom)
 	end = time.time()
 	print("sort from pic: " + str(end - start))
 
 	# sorted list of PixelSq for To Pic
 	start = time.time()
-	sqTo = squares(imgTo, to = True)
+	sqTo = squares(imgTo)
 	end = time.time()
 	print("sort to pic: " + str(end - start))
 
